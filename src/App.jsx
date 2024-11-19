@@ -9,7 +9,7 @@ import HomePage from './components/Home/Home';
 import AboutPage from './components/About/About';
 import ContactPage from './components/Contact/Contact';
 import ProductsPage from './components/Products/Products';
-import Itemdetail from './components/Itemdetail/Itemdetail';
+import ProductsPage from './components/Products/Products';
 import ProductsCategory from './components/Category/Category';
 import FormPage from './components/FormPage/FormPage';
 import Car from './components/Car/Car';
