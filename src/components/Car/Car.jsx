@@ -1,43 +1,59 @@
-import React from 'react';
+import React from "react";
+import useStore from "../../Store/Store.jsx";
 
-const Car = ({ car, eliminarDelCar, cerrarCarrito }) => {
+const Car = () => {
+  const { car, removeFromCar, updateQuantity } = useStore();
+
+  
   const calcularTotal = () => {
-    return car.reduce((total, prod) => {
-      const priceNumber = parseFloat(prod.price.replace(/[^\d]/g, '')) / 100;
-      return total + priceNumber;
+    return car.reduce((total, producto) => {
+      const precioNumerico = parseFloat(producto.price.replace(/[^\d]/g, '')) / 100;
+      return total + precioNumerico * producto.quantity;
     }, 0);
   };
 
   return (
-    <div className="fixed bottom-4 right-4 bg-gray-800 text-white p-4 rounded-lg shadow-lg w-72 max-h-[300px] overflow-y-auto">
-      <div className="flex justify-between items-center mb-2">
-        <h2 className="text-lg font-bold">Carrito</h2>
-        <button onClick={cerrarCarrito} className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 text-sm">
-          Cerrar
-        </button>
-      </div>
+    <div className="car-container p-4 bg-gray-100 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Carrito de Compras</h2>
+
       {car.length === 0 ? (
-        <p>No hay productos en el carrito.</p>
+        <p className="text-gray-600">No hay productos en el carrito.</p>
       ) : (
         <div>
           {car.map((producto) => (
-            <div key={producto.id} className="flex justify-between items-center mb-2">
-              <p className="text-sm">{producto.name}</p>
-              <p className="text-sm">{producto.price}</p>
+            <div
+              key={`${producto.id}-${producto.size}`}
+              className="mb-4 p-2 border-b border-gray-300"
+            >
+              <p className="font-medium text-gray-700">{producto.name} (Talla: {producto.size})</p>
+              <div className="flex items-center gap-4">
+                <label htmlFor={`cantidad-${producto.id}`} className="text-sm text-gray-600">
+                  Cantidad:
+                </label>
+                <input
+                  id={`cantidad-${producto.id}`}
+                  type="number"
+                  value={producto.quantity}
+                  min="1"
+                  max={producto.stock}
+                  className="w-16 p-1 border border-gray-300 rounded"
+                  onChange={(e) =>
+                    updateQuantity(producto.id, producto.size, Number(e.target.value))
+                  }
+                />
+              </div>
               <button
-                className="bg-red-600 text-white px-1 py-1 rounded hover:bg-red-700 text-xs"
-                onClick={() => eliminarDelCar(producto.id)}
+                onClick={() => removeFromCar(producto.id, producto.size)}
+                className="mt-2 text-red-600 hover:text-red-800"
               >
-                X
+                Eliminar
               </button>
             </div>
           ))}
-          <div className="mt-2">
-            <h3 className="text-md font-bold">Total: ${calcularTotal().toLocaleString('es-CL')}</h3>
-            <button className="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 mt-2 text-sm">
-              Finalizar Compra
-            </button>
-          </div>
+
+          <h3 className="text-xl font-bold mt-4 text-gray-800">
+            Total: ${calcularTotal().toLocaleString('es-CL')}
+          </h3>
         </div>
       )}
     </div>

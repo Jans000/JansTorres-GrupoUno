@@ -1,6 +1,5 @@
-// src/components/Header/Header.js
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -10,10 +9,9 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-4 text-lg">
             <li><Link to="/" className="hover:text-gray-200">Inicio</Link></li>
-            <li><Link to="/about" className="hover:text-gray-200">???</Link></li>
-            <li><Link to="/services" className="hover:text-gray-200">Servicios</Link></li>
+            <li><Link to="/products" className="hover:text-gray-200">Productos</Link></li>
+            <li><Link to="/about" className="hover:text-gray-200">Nosotros</Link></li>
             <li><Link to="/contact" className="hover:text-gray-200">Contacto</Link></li>
-            <li><Link to="/form" className="hover:text-gray-200">Formulario</Link></li> {}
           </ul>
         </nav>
       </div>

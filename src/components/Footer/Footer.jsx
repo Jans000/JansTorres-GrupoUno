@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white p-4 mt-auto">
       <div className="container mx-auto text-center">
-        <p>&copy; {new Date().getFullYear()} Mi Sitio Web. Todos los derechos reservados.</p>
+        <p>&copy; {new Date().getFullYear()} Mi Sitio Web. Todos los derechos reservados a mi xd.</p>
         <div className="flex justify-center space-x-4 mt-2">
           <a href="#facebook" className="text-blue-500 hover:text-blue-300">Facebook</a>
           <a href="#twitter" className="text-blue-400 hover:text-blue-300">Twitter</a>

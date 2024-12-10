@@ -1,91 +1,118 @@
-
 import React, { useState } from 'react';
 
-const FormPage = () => {
+const FormDePago = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    nombre: '',
+    apellido: '',
+    direccion: '',
+    telefono: '',
   });
-  
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleReset = () => {
     setFormData({
-      ...formData,
-      [name]: value,
+      nombre: '',
+      apellido: '',
+      direccion: '',
+      telefono: '',
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
- 
-
-    setIsSubmitted(true);
+    alert('Compra realizada. Gracias por su pedido.');
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6">
-      <h2 className="text-2xl font-bold mb-4">Formulario de Contacto</h2>
-      {isSubmitted ? (
-        <div className="text-center">
-          <p className="text-green-500">¡Gracias por tu mensaje! Nos pondremos en contacto pronto.</p>
+    <div className="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6 mt-8">
+      <h2 className="text-2xl font-bold text-center mb-6">Formulario de Pago</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="nombre" className="block text-sm font-semibold mb-2">
+            Nombre
+          </label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleInputChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+            placeholder="Tu nombre"
+            required
+          />
         </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-semibold mb-2">Nombre</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-semibold mb-2">Correo Electrónico</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
 
-          <div className="mb-4">
-            <label htmlFor="message" className="block text-sm font-semibold mb-2">Mensaje</label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-md"
-              rows="4"
-              required
-            />
-          </div>
+        <div className="mb-4">
+          <label htmlFor="apellido" className="block text-sm font-semibold mb-2">
+            Apellido
+          </label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            value={formData.apellido}
+            onChange={handleInputChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+            placeholder="Tu apellido"
+            required
+          />
+        </div>
 
+        <div className="mb-4">
+          <label htmlFor="direccion" className="block text-sm font-semibold mb-2">
+            Dirección
+          </label>
+          <input
+            type="text"
+            id="direccion"
+            name="direccion"
+            value={formData.direccion}
+            onChange={handleInputChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+            placeholder="Tu dirección"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="telefono" className="block text-sm font-semibold mb-2">
+            Teléfono
+          </label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleInputChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+            placeholder="(+56) 123456789"
+            required
+          />
+        </div>
+
+        <div className="flex justify-between">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700"
+          >
+            Limpiar
+          </button>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
-            Enviar
+            Confirmar
           </button>
-        </form>
-      )}
+        </div>
+      </form>
     </div>
   );
 };
 
-export default FormPage;
-
+export default FormDePago;

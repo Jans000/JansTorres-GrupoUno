@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useStore from '../../Store/Store.jsx';
 
-const ItemDetail = ({ agregarAlCarrito }) => {
+const ItemDetail = () => {
   const { productId } = useParams();
+  const agregarAlCarrito = useStore((state) => state.agregarAlCarrito);
 
   const productos = [
     {
@@ -61,8 +63,7 @@ const ItemDetail = ({ agregarAlCarrito }) => {
     },
   ];
 
- 
-  const producto = productos.find((p) => p.id === parseInt(productId));
+  const producto = productos.find((p) => p.id === Number(productId));
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
 
@@ -81,6 +82,7 @@ const ItemDetail = ({ agregarAlCarrito }) => {
       size: selectedSize,
       quantity,
     });
+
     alert('Producto agregado al carrito');
   };
 
@@ -88,10 +90,10 @@ const ItemDetail = ({ agregarAlCarrito }) => {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">{producto.name}</h1>
       <img
-          src={producto.imgSrc}
-          alt={producto.name}
-          className="w-full h-64 object-contain mb-4"
-        />
+        src={producto.imgSrc}
+        alt={producto.name}
+        className="w-full h-64 object-contain mb-4"
+      />
       <p className="text-gray-600">{producto.category}</p>
       <p className="text-lg font-bold mb-4">{producto.price}</p>
 
